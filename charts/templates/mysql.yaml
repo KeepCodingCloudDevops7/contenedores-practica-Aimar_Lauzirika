@@ -53,11 +53,11 @@ spec:
           mountPath: /var/lib/mysql
         resources:
           limits:
-            cpu: {{ .Values.resources.limits.cpu }}
-            memory: {{ .Values.resources.limits.memory }}
+            cpu: {{ .Values.dbResources.limits.cpu }}
+            memory: {{ .Values.dbResources.limits.memory }}
           requests:
-            cpu: {{ .Values.resources.requests.cpu }}
-            memory: {{ .Values.resources.requests.memory }}
+            cpu: {{ .Values.dbResources.requests.cpu }}
+            memory: {{ .Values.dbResources.requests.memory }}
       volumes:
       - name: mount-initdb
         configMap:
