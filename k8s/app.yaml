@@ -74,11 +74,11 @@ kind: Service
 metadata:
   name: webapp-svc
 spec:
-  type: NodePort
+  # type: NodePort
   selector:
     app: webapp
   ports:
     - protocol: TCP
-      port: 5000
+      port: 80
       targetPort: 5000
-      nodePort: 30100
+      # nodePort: 30100

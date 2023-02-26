@@ -87,3 +87,14 @@ minikube addons enable ingress
 ```
 
 ### Despliegue
+
+Situándonos en el directorio `k8s` ejecutamos este comando:
+```
+kubectl apply -f .
+```
+
+Si estamos utilizando minikube, para ver la aplicación en el navegador utilizamos la ip de minikube que lo obtenemos con el siguiente comando:
+```
+minikube ip
+```
+Ej: `192.168.49.2` y `192.168.49.2/inicializa-contador`
