@@ -1,0 +1,23 @@
+flaskCounterVersion: 0.1
+mysqlVersion: 8.0
+
+
+### Deployment
+replicaCount: 1
+
+resources:
+  limits:
+    cpu: "0.6"
+    memory: "200Mi"
+  requests:
+    cpu: "0.3"
+    memory: "100Mi"
+
+
+### HPA
+maxReplicas: 6
+minReplicas: 1
+
+
+### Ingress
+ingressPort: 80

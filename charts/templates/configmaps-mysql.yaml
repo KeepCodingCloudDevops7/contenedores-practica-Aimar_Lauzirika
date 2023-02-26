@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: config-mysql
+  name: cm-{{ include "charts.fullname" . }}
 data:
   init_db.sh: |
     #!/bin/bash

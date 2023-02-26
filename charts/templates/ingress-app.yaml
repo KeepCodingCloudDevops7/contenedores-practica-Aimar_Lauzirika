@@ -1,7 +1,7 @@
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: ingress-app
+  name: ingress-{{ include "charts.fullname" . }}
 spec:
   ingressClassName: nginx
   rules:
@@ -11,6 +11,6 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: webapp-svc
+            name: svc-app-{{ include "charts.fullname" . }}
             port:
-              number: 80
+              number: {{ .Values.ingressPort }}

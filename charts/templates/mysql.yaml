@@ -2,27 +2,29 @@ apiVersion: v1
 kind: Service
 metadata:
   name: svc-db
+  labels:
+    {{- include "charts.labels" . | nindent 4}}
 spec:
   ports:
   - port: 3306
   clusterIP: None
   selector:
-    app: pod-mysql
+    {{- include "charts.labels" . | nindent 4}}
 ---
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: sfs-mysql
+  name: sfs-bbdd-{{ include "charts.fullname" . }}
 spec:
   replicas: 1
   serviceName: "db"
   selector:
     matchLabels:
-      app: pod-mysql
+      {{- include "charts.labels" . | nindent 6}}
   template:
     metadata:
       labels:
-        app: pod-mysql
+        {{- include "charts.labels" . | nindent 8}}
     spec:
       affinity:
         podAffinity:
@@ -43,7 +45,7 @@ spec:
         - containerPort: 3306
         envFrom:
         - secretRef:
-            name: mysql-secret
+            name: secret-{{ include "charts.fullname" . }}
         volumeMounts:
         - name: mount-initdb
           mountPath: /docker-entrypoint-initdb.d
@@ -59,7 +61,7 @@ spec:
       volumes:
       - name: mount-initdb
         configMap:
-          name: config-mysql
+          name: cm-{{ include "charts.fullname" . }}
           items:
           - key: init_db.sh
             path: init_db.sh

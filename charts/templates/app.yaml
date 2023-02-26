@@ -42,37 +42,37 @@ spec:
         - containerPort: 5000
         resources:
           limits:
-            cpu: "0.6"
-            memory: "200Mi"
+            cpu: {{ .Values.resources.limits.cpu }}
+            memory: {{ .Values.resources.limits.memory }}
           requests:
-            cpu: "0.3"
-            memory: "100Mi"
+            cpu: {{ .Values.resources.requests.cpu }}
+            memory: {{ .Values.resources.requests.memory }}
         env:
         - name: MYSQL_USER
           valueFrom:
             secretKeyRef:
-              name: mysql-secret
+              name: secret-{{ include "charts.fullname" . }}
               key: MYSQL_USER
         - name: MYSQL_PASSWORD
           valueFrom:
             secretKeyRef:
-              name: mysql-secret
+              name: secret-{{ include "charts.fullname" . }}
               key: MYSQL_PASSWORD
         - name: MYSQL_DATABASE
           valueFrom:
             secretKeyRef:
-              name: mysql-secret
+              name: secret-{{ include "charts.fullname" . }}
               key: MYSQL_DATABASE
         - name: MYSQL_HOST
           valueFrom:
             secretKeyRef:
-              name: mysql-secret
+              name: secret-{{ include "charts.fullname" . }}
               key: MYSQL_HOST
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: webapp-svc
+  name: svc-app-{{ include "charts.fullname" . }}
 spec:
   # type: NodePort
   selector:

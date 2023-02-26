@@ -67,19 +67,7 @@ Si quisieramos destruir también el vólumen con los datos, además de los conte
 docker compose down -v
 ```
 
-## Flask Counter con Docker
-
-Es posible que la base de datos no se halla configurado automáticamente. Cuando esto sucede, el navegador nos mostrará el siguiente error:
-
-![error-init-db image](imgs/error-init-db.png)
-
-Si se nos muestra este error tenemos que ejecutar el siguiente comando:
-```
-k exec --stdin --tty sfs-mysql-0 -- bash /docker-entrypoint-initdb.d/init_db.sh
-```
-
 ## Flask Counter con Kubernetes
-
 
 ### Requisitos
 
@@ -105,6 +93,16 @@ minikube ip
 Ej: `192.168.49.2` y `192.168.49.2/inicializa-contador`
 
 Requiere unos 20 segundos desde que despliega para que esté todo funcionando.
+
+Es posible que la base de datos no se halla configurado automáticamente. Cuando esto sucede, el navegador nos mostrará el siguiente error:
+
+![error-init-db image](imgs/error-init-db.png)
+
+Si se nos muestra este error tenemos que ejecutar el siguiente comando:
+```
+k exec --stdin --tty sfs-mysql-0 -- bash /docker-entrypoint-initdb.d/init_db.sh
+```
+
 
 ### Desinstalar la aplicación
 
@@ -138,6 +136,15 @@ minikube ip
 Ej: `192.168.49.2` y `192.168.49.2/inicializa-contador`
 
 Requiere unos 20 segundos desde que despliega para que esté todo funcionando.
+
+Es posible que la base de datos no se halla configurado automáticamente. Cuando esto sucede, el navegador nos mostrará el siguiente error:
+
+![error-init-db image](imgs/error-init-db.png)
+
+Si se nos muestra este error tenemos que ejecutar el siguiente comando:
+```
+k exec --stdin --tty [nombrePodBBDD] -- bash /docker-entrypoint-initdb.d/init_db.sh
+```
 
 ### Eliminar la aplicación
 
