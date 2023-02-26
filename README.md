@@ -74,3 +74,16 @@ Si se nos muestra este error tenemos que ejecutar el siguiente comando:
 ```
 k exec --stdin --tty sfs-mysql-0 -- bash /docker-entrypoint-initdb.d/init_db.sh
 ```
+
+## Flask Counter con Kubernetes
+
+
+### Requisitos
+
+Necesitaremos instalar metrics-server e ingress para desplegarlo. Con minikube sería con los siguientes comandos:
+```
+minikube addons enable metrics-server
+minikube addons enable ingress
+```
+
+### Despliegue
