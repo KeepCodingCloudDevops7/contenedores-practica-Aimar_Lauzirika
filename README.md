@@ -122,7 +122,7 @@ Necesitarás instalar `Helm` en tu equipo. [Link para instalar Helm](https://hel
 
 ### Desplegar la aplicación
 
-Desde el directorio `helm-chart` ejecutamos:
+Desde el directorio `charts` ejecutamos:
 ```
 helm install miapp ./
 ```
@@ -162,5 +162,5 @@ helm install -f my-values.yaml miapp ./
 
 O podemos escribir directamente algun cambio en el comando:
 ```
-helm install -f my-values.yaml miapp ./ --set ingressEnabled=false
+helm install  miapp ./ --set ingressEnabled=false
 ```
