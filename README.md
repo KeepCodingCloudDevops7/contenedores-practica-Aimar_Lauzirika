@@ -158,3 +158,9 @@ Los valores que quieres modificar los puedes escribir en el ficher `my-values.ya
 
 ```
 helm install -f my-values.yaml miapp ./
+```
+
+O podemos escribir directamente algun cambio en el comando:
+```
+helm install -f my-values.yaml miapp ./ --set ingressEnabled=false
+```

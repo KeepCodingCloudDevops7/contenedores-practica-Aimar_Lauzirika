@@ -3,6 +3,7 @@ kind: ConfigMap
 metadata:
   name: cm-{{ include "charts.fullname" . }}
 data:
+  # db_host: db-host-{{ include "charts.fullname" . }}
   init_db.sh: |
     #!/bin/bash
 

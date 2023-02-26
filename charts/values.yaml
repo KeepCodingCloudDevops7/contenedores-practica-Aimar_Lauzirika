@@ -1,6 +1,6 @@
 flaskCounterVersion: 0.1
 mysqlVersion: 8.0
-
+ingressEnabled: true
 
 ### Deployment
 replicaCount: 1
@@ -13,6 +13,14 @@ resources:
     cpu: "0.3"
     memory: "100Mi"
 
+### StatefulSet
+resources:
+  limits:
+    cpu: "0.6"
+    memory: "1000Mi"
+  requests:
+    cpu: "0.3"
+    memory: "500Mi"
 
 ### HPA
 maxReplicas: 6

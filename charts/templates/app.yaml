@@ -64,10 +64,7 @@ spec:
               name: secret-{{ include "charts.fullname" . }}
               key: MYSQL_DATABASE
         - name: MYSQL_HOST
-          valueFrom:
-            secretKeyRef:
-              name: secret-{{ include "charts.fullname" . }}
-              key: MYSQL_HOST
+          value: svc-db-{{ include "charts.fullname" . }}
 ---
 apiVersion: v1
 kind: Service
