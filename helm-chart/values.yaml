@@ -1,5 +1,5 @@
-flask-counter-version: 0.1
-mysql-version: 8.0
+flaskCounterVersion: 0.1
+mysqlVersion: 8.0
 
 replicaCount: 1
 

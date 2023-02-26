@@ -37,7 +37,7 @@ spec:
               topologyKey: "topology.kubernetes.io/hostname"
       containers:
       - name: flask-counter
-        image: aimarlauzirika/flask-counter:{{.Values.flask-counter-version}}
+        image: aimarlauzirika/flask-counter:{{.Values.flaskCounterVersion}}
         ports:
         - containerPort: 5000
         resources:

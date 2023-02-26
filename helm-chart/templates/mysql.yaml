@@ -38,7 +38,7 @@ spec:
               topologyKey: "topology.kubernetes.io/hostname"
       containers:
       - name: mysqldb
-        image: mysql:{{ .Values.mysql-version }}
+        image: mysql:{{ .Values.mysqlVersion }}
         ports:
         - containerPort: 3306
         envFrom:
