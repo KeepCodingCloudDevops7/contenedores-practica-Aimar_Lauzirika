@@ -7,7 +7,7 @@ app = Flask(__name__)
 app.config['MYSQL_DB'] = os.environ['MYSQL_DATABASE'] or "mysql_database"
 app.config['MYSQL_USER'] = os.environ['MYSQL_USER'] or "keepcoding"
 app.config['MYSQL_PASSWORD'] = os.environ['MYSQL_PASSWORD'] or "root"
-app.config['MYSQL_HOST'] = os.environ['MYSQL_HOST'] or "db"
+app.config['MYSQL_HOST'] = os.environ['MYSQL_HOST'] or "svc-db"
 mysql = MySQL(app)
 
 
