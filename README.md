@@ -106,12 +106,14 @@ Ej: `192.168.49.2` y `192.168.49.2/inicializa-contador`
 
 Requiere unos 20 segundos desde que despliega para que esté todo funcionando.
 
-#### Eliminar la aplicación
+### Desinstalar la aplicación
 
 ```
 kubectl delete -f .
 ```
+### Configuración
 
+Los valores configurables de la aplicación están con codificación en `base64` en el fichero `secrets-mysql.yaml`. Para cambiarlos edita el fichero añadiendo los nuevos valores codificados.
 
 ## Flask Counter con Helm
 
@@ -124,7 +126,7 @@ Necesitarás instalar `Helm` en tu equipo. [Link para instalar Helm](https://hel
 
 Desde el directorio `helm-chart` ejecutamos:
 ```
-helm install miapp .
+helm install miapp ./
 ```
 
 ### Comprobar la aplicación
@@ -142,3 +144,10 @@ Requiere unos 20 segundos desde que despliega para que esté todo funcionando.
 ```
 helm uninstall miapp
 ```
+
+### Configuración de la aplicación
+
+Los valores que quieres modificar los puedes escribir en el ficher `my-values.yaml` y instalar la aplicación de la siguiente manera:
+
+```
+helm install -f my-values.yaml miapp ./

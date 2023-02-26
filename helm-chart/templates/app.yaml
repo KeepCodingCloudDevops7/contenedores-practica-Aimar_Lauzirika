@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: dpl-app
+  name: dpl-counter-{{ include "charts.fullname" . }}
 spec:
-  replicas: 1
+  replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
       app: webapp
@@ -37,7 +37,7 @@ spec:
               topologyKey: "topology.kubernetes.io/hostname"
       containers:
       - name: flask-counter
-        image: aimarlauzirika/flask-counter:0.1
+        image: aimarlauzirika/flask-counter:{{.Values.flask-counter-version}}
         ports:
         - containerPort: 5000
         resources:
