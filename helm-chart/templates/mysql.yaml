@@ -1,0 +1,75 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: svc-db
+spec:
+  ports:
+  - port: 3306
+  clusterIP: None
+  selector:
+    app: pod-mysql
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: sfs-mysql
+spec:
+  replicas: 1
+  serviceName: "db"
+  selector:
+    matchLabels:
+      app: pod-mysql
+  template:
+    metadata:
+      labels:
+        app: pod-mysql
+    spec:
+      affinity:
+        podAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+          - weight: 1
+            podAffinityTerm:
+              labelSelector:
+                matchExpressions:
+                - key: app
+                  operator: In
+                  values: 
+                  - webapp
+              topologyKey: "topology.kubernetes.io/hostname"
+      containers:
+      - name: mysqldb
+        image: mysql:8.0
+        ports:
+        - containerPort: 3306
+        envFrom:
+        - secretRef:
+            name: mysql-secret
+        volumeMounts:
+        - name: mount-initdb
+          mountPath: /docker-entrypoint-initdb.d
+        - name: data-db
+          mountPath: /var/lib/mysql
+        resources:
+          limits:
+            cpu: "0.6"
+            memory: "1000Mi"
+          requests:
+            cpu: "0.3"
+            memory: "500Mi"
+      volumes:
+      - name: mount-initdb
+        configMap:
+          name: config-mysql
+          items:
+          - key: init_db.sh
+            path: init_db.sh
+  volumeClaimTemplates:
+  - metadata:
+      name: data-db
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      storageClassName: standard
+      resources:
+        requests:
+          storage: 1Gi
+

@@ -1,5 +1,0 @@
-[] Ingress
-    [] Crear svc-clusterIP para app
-    [] Crear LoadBalancer (apunta a (selector) app.pod)
-    [] Instalar ingress
-    [] Crear ingress.yaml (apunta a svc de app)

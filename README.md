@@ -22,6 +22,8 @@ Si no tienes el plugin instalado puedes instalarte el binario docker-compose o i
 
 ### Iniciar Flask Counter
 
+> ¡AVISO! Utilizar la aplicación con las configuraciones por defecto de la base de datos es muy inseguro. Deberías cambiarlas antes de instalar la aplicación. Mira el apartado de configuración más abajo.
+
 Descargate el repositorio, y con la terminal situate en el directorio de la aplicación, en la ubicación donde se encuentra el fichero README.md, Dockerfile, etc.. Ahora ejecuta el siguiente comando:
 ```
 docker compose up -d
@@ -46,6 +48,7 @@ La aplicación nos muestra el número de visitantes que ha tenido. Y podemos hac
 También tiene la funcionalidad de resetear el número de visitas si visitamos la url `localhost:5005/inicializa-contador`
 
 ### Configuraciones
+
 Esta aplicación permite algunas configuraciones mediante variables de entorno. La aplicación tiene unos valores por defecto para estas configuraciones por lo que funcionará sin que se le indique ninguna configuración personalizada.
 
 Las variables de entorno con las que configuramos esta aplicación están escritas en el fichero `.env`. En este fichero podremos personalizar algunas características de MySQL (contraseña de root, nombre de usuario, contraseña de usuario, nombre de la base de datos y el host) y el puerto de la máquina HOST para acceder a la aplicación, que por defecto es 5005.
@@ -93,8 +96,49 @@ Situándonos en el directorio `k8s` ejecutamos este comando:
 kubectl apply -f .
 ```
 
+#### Comprobar la aplicación
+
 Si estamos utilizando minikube, para ver la aplicación en el navegador utilizamos la ip de minikube que lo obtenemos con el siguiente comando:
 ```
 minikube ip
 ```
 Ej: `192.168.49.2` y `192.168.49.2/inicializa-contador`
+
+Requiere unos 20 segundos desde que despliega para que esté todo funcionando.
+
+#### Eliminar la aplicación
+
+```
+kubectl delete -f .
+```
+
+
+## Flask Counter con Helm
+
+
+### Requisitos
+
+Necesitarás instalar `Helm` en tu equipo. [Link para instalar Helm](https://helm.sh/docs/intro/install/)
+
+### Desplegar la aplicación
+
+Desde el directorio `helm-chart` ejecutamos:
+```
+helm install miapp .
+```
+
+### Comprobar la aplicación
+
+Si estamos utilizando minikube, para ver la aplicación en el navegador utilizamos la ip de minikube que lo obtenemos con el siguiente comando:
+```
+minikube ip
+```
+Ej: `192.168.49.2` y `192.168.49.2/inicializa-contador`
+
+Requiere unos 20 segundos desde que despliega para que esté todo funcionando.
+
+### Eliminar la aplicación
+
+```
+helm uninstall miapp
+```
